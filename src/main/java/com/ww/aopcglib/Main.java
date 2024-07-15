@@ -35,4 +35,8 @@ public class Main {
 
         return enhancer.create();
     }
+
+    public boolean checkSuperClass(Class classType) {
+        return this.getClass().isAssignableFrom(classType);
+    }
 }
