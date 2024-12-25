@@ -29,7 +29,7 @@ public class TwoSumIIInputArrayIsSorted167 {
         if (numbers[beginIndex] + numbers[endIndex] == target) {
             return new int[]{beginIndex + 1, endIndex + 1};
         } else {
-            return null;
+            return new int[]{};
         }
     }
 
