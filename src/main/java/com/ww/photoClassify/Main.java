@@ -24,12 +24,8 @@ public class Main {
         if (photo.exists()) {
             if (photo.isDirectory()) {
                 // 输入的是照片目录
-                System.out.println("输入的照片目录地址为：" + input);
+                System.out.println("开始进行照片归档，输入的照片目录地址为：" + input);
                 classifyDirectory(photo);
-            } else if (photo.isFile()) {
-                // 输入的是照片
-                System.out.println("输入的照片地址为：" + input);
-                return;
             } else {
                 // 非法的输入
                 System.out.println("输入的照片目录地址不正确：" + input);
@@ -40,6 +36,8 @@ public class Main {
             System.out.println("输入的照片目录地址不存在：" + input);
             return;
         }
+
+        System.out.println("完成进行照片归档，输入的照片目录地址为：" + input);
     }
 
     // 文件夹里的文件分类
@@ -47,7 +45,7 @@ public class Main {
         if (photo.exists()) {
             if (photo.isDirectory()) {
                 File[] files = photo.listFiles();
-                for(int i = 0; i < files.length; i++) {
+                for (int i = 0; i < files.length; i++) {
                     classifyDirectory(files[i]);
                 }
             } else if (photo.isFile()) {
@@ -65,13 +63,13 @@ public class Main {
         String fileUpdateAt = getUpdateDate(photo);
         String filePath = genPath(fileUpdateAt);
         String fileName = genFileName(photo.getName(), filePath);
-        boolean success = photo.renameTo(new File(fileName));
-        if (!success) {
-            try {
+        try {
+            boolean success = photo.renameTo(new File(fileName));
+            if (!success) {
                 System.out.println("文件移动失败：" + photo.getCanonicalPath() + ", 至：" + fileName);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
